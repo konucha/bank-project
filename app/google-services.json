@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "224699772768",
+    "project_id": "bank-akprind",
+    "storage_bucket": "bank-akprind.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224699772768:android:c726ef8daf48d8aad8b805",
+        "android_client_info": {
+          "package_name": "com.example.bankakprind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224699772768-87r6fd18l68lgdkkq70vbh4e96i3hpop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkYy6tWWF4ufOAjkDn7QeXpyrkOkuXHTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224699772768-87r6fd18l68lgdkkq70vbh4e96i3hpop.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

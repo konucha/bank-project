@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/nav_transact"
+        android:title="Transaksi"
+        android:icon="@drawable/ic_transact"/>
+    <item
+        android:id="@+id/nav_history"
+        android:title="Histori"
+        android:icon="@drawable/ic_history"/>
+    <item
+        android:id="@+id/nav_account"
+        android:title="Akun"
+        android:icon="@drawable/ic_account"/>
+
+    <item
+        android:id="@+id/nav_dev"
+        android:title="Profile"
+        android:icon="@drawable/ic_dev"/>
+
+
+</menu>

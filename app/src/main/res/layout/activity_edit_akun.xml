@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".EditAkun">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
+        android:text="Tambah Transaksi"
+        android:textSize="30sp"
+        android:textColor="@color/orange"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/tv_norekeningedit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="No. Rekening"
+        android:padding="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:inputType="number"
+        android:background="@drawable/edittextbackground"/>
+
+    <EditText
+        android:id="@+id/tv_namaedit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="Nama"
+        android:padding="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:inputType="number"
+        android:background="@drawable/edittextbackground"/>
+
+    <EditText
+        android:id="@+id/tv_alamatedit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="Alamat"
+        android:padding="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:inputType="number"
+        android:background="@drawable/edittextbackground"/>
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="Edit"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/orange"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp" />
+
+    <Button
+        android:id="@+id/btnBatal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:text="Batal"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/orange"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="20dp"/>
+</LinearLayout>
