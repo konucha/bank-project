@@ -3,10 +3,11 @@ package com.example.bankakprind.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bankakprind.DetailTransaction;
 import com.example.bankakprind.R;
 import com.example.bankakprind.adapter.TransactionAdapter;
-import com.example.bankakprind.helper.CurrencyRupiah;
 import com.example.bankakprind.helper.DBRekening;
 import com.example.bankakprind.model.RekeningModel;
 import com.example.bankakprind.model.TransactionModel;
@@ -30,12 +30,11 @@ import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link TrasactionHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
-
-    public HomeFragment() {
+public class TrasactionHistoryFragment extends Fragment {
+    public TrasactionHistoryFragment() {
         // Required empty public constructor
     }
 
@@ -43,12 +42,12 @@ public class HomeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param Parameter 1.
-     * @return A new instance of fragment HomeFragment.
+     * @param param Parameter akun rekening.
+     * @return A new instance of fragment SearchFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(RekeningModel param) {
-        HomeFragment fragment = new HomeFragment();
+    public static TrasactionHistoryFragment newInstance(RekeningModel param) {
+        TrasactionHistoryFragment fragment = new TrasactionHistoryFragment();
         Bundle args = new Bundle();
         args.putSerializable("akun", param);
         fragment.setArguments(args);
@@ -66,24 +65,11 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // ambil view xml
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        TextView tvNama = view.findViewById(R.id.tvNama);
-        TextView tvAlamat = view.findViewById(R.id.tvAlamat);
-        TextView tvSaldo = view.findViewById(R.id.tvSaldo);
-
-
-        tvNama.setText(akun.getNama());
-        tvAlamat.setText(akun.getAlamat());
-        tvSaldo.setText(CurrencyRupiah.format(akun.getSaldo()));
-
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_transaction_history, container, false);
         recycleViewRun(view);
-
         return view;
     }
 
@@ -92,7 +78,7 @@ public class HomeFragment extends Fragment {
     TransactionAdapter transactionAdapter;
 
     private void recycleViewRun(View view) {
-        recyclerView = view.findViewById(R.id.recycle_transaksi);
+        recyclerView = view.findViewById(R.id.recycle_history);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -102,20 +88,26 @@ public class HomeFragment extends Fragment {
                 new TransactionAdapter.OnTransaksiListener() {
                     @Override
                     public void onTransaksiClick(TransactionModel transactionModel) {
+
+//                        Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT).show();
+
                         Intent it = new Intent(view.getContext(), DetailTransaction.class);
                         it.putExtra("akun", akun);
                         it.putExtra("transaksi", transactionModel);
+//                        Log.d("ASUS", "akun: " + transactionModel.getUang());
+
                         startActivity(it);
                     }
                 }
         );
         recyclerView.setAdapter(transactionAdapter);
 
-        // Query data ke firebase
+
+        // Query firebase
+        // TODO Urutkan transaksi paling akhir  berada di atas
         Query reference = DBRekening.getInstance()
                 .getReference("transactions")
-                .child(String.valueOf(akun.getNoRekening()))
-                .orderByKey().limitToLast(3);
+                .child(String.valueOf(akun.getNoRekening()));
 
         reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -135,7 +127,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

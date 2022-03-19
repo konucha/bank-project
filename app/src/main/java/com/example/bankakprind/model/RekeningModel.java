@@ -3,19 +3,20 @@ package com.example.bankakprind.model;
 import java.io.Serializable;
 
 public class RekeningModel implements Serializable {
-    private int noKtp;
+    private Long noKtp;
     private String nama;
     private String alamat;
     private int noRekening;
     private int pin;
     private double saldo;
 
-    public RekeningModel(int noKtp, String nama, String alamat, int noRekening, int pin) {
+    public RekeningModel(Long noKtp, String nama, String alamat, int noRekening, int pin, Double saldo) {
         this.noKtp = noKtp;
         this.nama = nama;
         this.alamat = alamat;
         this.noRekening = noRekening;
         this.pin = pin;
+        this.saldo = saldo;
     }
 
     public double getSaldo() {
@@ -26,11 +27,11 @@ public class RekeningModel implements Serializable {
         this.saldo = saldo;
     }
 
-    public int getNoKtp() {
+    public Long getNoKtp() {
         return noKtp;
     }
 
-    public void setNoKtp(int noKtp) {
+    public void setNoKtp(Long noKtp) {
         this.noKtp = noKtp;
     }
 
