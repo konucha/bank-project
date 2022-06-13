@@ -1,57 +1,62 @@
 package com.example.bankakprind.fragment;
 
-import androidx.annotation.NonNull;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.bankakprind.R;
+import com.example.bankakprind.model.RekeningModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainFragment extends AppCompatActivity {
 
     BottomNavigationView navigationView;
 
+    RekeningModel akun;
+
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_fragment);
 
-        getSupportActionBar().hide();
+        Intent it = getIntent();
+        akun = (RekeningModel) it.getSerializableExtra("akun");
 
         navigationView = findViewById(R.id.button_navigation);
-        getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new HomeFragment()).commit();
+
+        // fragement active pertamakali buka activity
+        getSupportFragmentManager().beginTransaction().replace(R.id.body_container, HomeFragment.newInstance(akun)).commit();
+
         navigationView.setSelectedItemId(R.id.nav_home);
 
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
-                switch (item.getItemId()){
-                    case R.id.nav_home:
-                        fragment = new HomeFragment();
-                        break;
-                    case R.id.nav_transact:
-                        fragment = new TransactFragment();
-                        break;
-                    case R.id.nav_history:
-                        fragment = new HistoryFragment();
-                        break;
-                    case R.id.nav_account:
-                        fragment = new AccountFragment();
-                        break;
-                    case R.id.nav_dev:
-                        fragment = new DevFragment();
-                        break;
-                }
+        navigationView.setOnItemSelectedListener(item -> {
+            Fragment fragment = null;
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+                    fragment = HomeFragment.newInstance(akun);
+                    break;
+                case R.id.nav_transact:
+                    fragment = TransactionFragment.newInstance(akun);
+                    break;
+                case R.id.nav_history:
+                    fragment = TrasactionHistoryFragment.newInstance(akun);
+                    break;
+                case R.id.nav_account:
+                    fragment = ProfileFragment.newInstance(akun);
+                    break;
+                case R.id.nav_dev:
+                    fragment = new DevFragment();
+                    break;
+            }
+
+            if (fragment != null)
                 getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
 
-
-                return true;
-            }
+            return true;
         });
-
     }
 }
